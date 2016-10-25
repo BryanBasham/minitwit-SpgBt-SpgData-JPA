@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
+    <title th:text="${title}">Title</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"></link>
+</head>
+<body>
+<div class="page">
+
+    <h1>MiniTwit</h1>
+    <div class="navigation">
+      <span th:if="${user != null}"><a th:href="@{/}">my timeline</a> |</span>
+      <a th:href="@{/public}">public timeline</a> |
+      <a th:if="${user != null}" th:href="@{/logout}" th:text="${'sign out [' + user.username + ']'}">sign out</a>
+      <span th:if="${user == null}">
+        <a th:href="@{/register}">sign up</a> | <a th:href="@{/login}">sign in</a>
+      </span>
+    </div>
+    
+    <div class="body">
+	    <h2 th:text="${pageTitle}">Timeline</h2>
+	    
+	    <div th:if="${user != null}">
+	      <div class="followstatus" th:if="${profileUser != null and profileUser.id != user.id}">
+          <a th:if="${followed}" th:href="@{/t/{user}/unfollow(user=${profileUser.username})}">Unfollow user</a>
+          <a th:if="${!followed}" th:href="@{/t/{user}/follow(user=${profileUser.username})}">Follow user</a>
+	      </div>
+	
+	      <!-- FIXME: only show on the user's timeline -->
+	      <div class="twitbox" th:if="${pageTitle != 'Public Timeline'}">
+	        <h3>What's on your mind <span th:text="${user.username}">user</span>?</h3>
+	        <form th:action="@{/message}" method="post">
+	          <p>
+	            <input type="text" name="text" size="60" maxlength="160" />
+              <input type="submit" value="Share" />
+	          </p>
+	        </form>
+	      </div>
+	    </div>
+
+			<p th:text="${'' + messages.size() + ' messages.'}" />
+      <ul class='messages'>
+        <li th:each="msg : ${messages}">
+          <img th:src="${msg.gravatar}" />
+          <p>
+            <strong><a th:href="@{/t/{user}(user=${msg.user.username})}" th:text="${msg.user.username}">user</a></strong>
+            <span th:text="${msg.text}">msg</span>
+            <small>&mdash; <span th:text="${msg.pubDateStr}">N/A</span></small>
+          </p>
+        </li>
+      </ul>
+    </div>
+    
+    <div class="footer">
+      MiniTwit &mdash; A SpringBoot Application
+    </div>
+</div>
+</body>
+</html>

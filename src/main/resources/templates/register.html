@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:tiles="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
+<title th:text="${title} + ' | MiniTwit'"></title>
+<link rel="stylesheet" type="text/css" href="/css/style.css"></link>
+</head>
+<body>
+	<div class="page">
+		<h1>MiniTwit</h1>
+		<div class="navigation">
+			<a th:href="@{/public}">public timeline</a>
+		</div>
+		<div class="body">
+
+			<h2>Sign Up</h2>
+			<div class="error" th:if="${error != null}">
+				<strong>Error:</strong> <span th:text="${error}">error
+					message</span>
+			</div>
+			<form th:action="@{/register}" th:object="${user}" method="post">
+				<dl>
+				
+					<dt>Username:</dt>
+					<dd>
+						<input type="text" th:field="*{username}" maxlength="50" size="30" />
+					</dd>
+					
+					<dt>E-Mail:</dt>
+					<dd>
+						<input type="text" th:field="*{email}" maxlength="50" size="30" />
+					</dd>
+					
+					<dt>Password:</dt>
+					<dd>
+						<input type="password" th:field="*{password}" maxlength="20" size="30" />
+					</dd>
+					
+					<dt>Password <small>(repeat)</small>:</dt>
+					<dd>
+						<input type="password" th:field="*{password2}" maxlength="20" size="30" />
+					</dd>
+					
+				</dl>
+				<div class="actions">
+					<input type="submit" value="Sign Up" />
+				</div>
+			</form>
+
+		</div>
+		<div class="footer">MiniTwit &mdash; A SpringBoot Application</div>
+	</div>
+</body>
+</html>

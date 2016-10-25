@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
+    <title th:text="${title}">Title</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"></link>
+</head>
+<body>
+<div class="page">
+
+    <h1>MiniTwit: Who I Follow</h1>
+    <div class="navigation">
+      <span th:if="${user != null}"><a th:href="@{/}">my timeline</a> |</span>
+      <a th:href="@{/public}">public timeline</a> |
+      <a th:if="${user != null}" th:href="@{/logout}" th:text="${'sign out [' + user.username + ']'}">sign out</a>
+      <span th:if="${user == null}">
+        <a th:href="@{/register}">sign up</a> | <a th:href="@{/login}">sign in</a>
+      </span>
+    </div>
+    
+    <div class="body">
+	    <ul>
+	      <li th:each="friend : ${friends}"><a th:href="@{/t/{user}(user=${friend.username})}" th:text="${friend.username}">user</a></li>
+	    </ul>
+    </div>
+    
+    <div class="footer">
+      MiniTwit &mdash; A SpringBoot Application
+    </div>
+</div>
+</body>
+</html>

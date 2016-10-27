@@ -16,36 +16,29 @@
 
 package com.minitwit;
 
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
 
-import com.minitwit.domain.Message;
-import com.minitwit.domain.User;
 import com.minitwit.service.MiniTwitService;
 
 @Configuration
 @ComponentScan
 @EnableAutoConfiguration
-public class SampleDataJpaApplication {
+public class Application {
 	
 	@Autowired
 	private MiniTwitService twitSvc;
 
 	public static void main(String[] args) throws Exception {
-		SpringApplication.run(SampleDataJpaApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 	
 }
 
+/*
 @Component
 class TheCommand implements CommandLineRunner {
 
@@ -55,7 +48,6 @@ class TheCommand implements CommandLineRunner {
 	
 	@Override
 	public void run(String... args) throws Exception {
-		System.out.format("here with %s args", args.length);
 		final List<User> users = twitSvc.getAllUsers();
 		System.out.format("users count is %d%n", users.size());
 		users.stream().forEach(user -> {
@@ -73,3 +65,4 @@ class TheCommand implements CommandLineRunner {
 		});
 	}
 }
+*/

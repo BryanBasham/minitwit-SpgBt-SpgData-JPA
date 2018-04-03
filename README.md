@@ -1,4 +1,4 @@
-#M iniTwit
+# MiniTwit
 
 Java version of Flask's MiniTwit example built with Spring Boot, Spring MVC
 and Thymeleaf (template engine), Spring Data and JPA, and HSQLDB (as an in-memory database).
